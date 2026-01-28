@@ -10,8 +10,9 @@ help: ## 사용 가능한 명령어 목록 출력
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-25s\033[0m %s\n", $$1, $$2}'
 	@echo ""
 
-init: ## Bare repository 초기화 (e.g. make init REPO_URL=git@github.com:user/repo.git)
-	@test -n "$(REPO_URL)" || (echo "REPO_URL is required. Example: make init REPO_URL=git@..."; exit 1)
+init: ## Bare repository 초기화 (e.g. make init git@github.com:user/repo.git)
+	$(eval REPO_URL := $(filter-out $@,$(MAKECMDGOALS)))
+	@test -n "$(REPO_URL)" || (echo "REPO_URL is required. Example: make init git@..."; exit 1)
 	@test ! -d "$(BARE_DIR)" || (echo "$(BARE_DIR) already exists. Delete it and try again."; exit 1)
 	@git clone --bare $(REPO_URL) $(BARE_DIR)
 
