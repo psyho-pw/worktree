@@ -2,7 +2,7 @@
 
 set -e
 
-echo "🚀 Git Worktree Boilerplate 설정 스크립트"
+echo "🚀 Git Worktree 최초 설정 스크립트"
 echo ""
 
 # 색상 정의
@@ -57,10 +57,10 @@ make worktree-list
 echo ""
 echo -e "${GREEN}✅ 설정 완료!${NC}"
 echo ""
-echo "📁 워크트리 디렉터리: ../$MAIN_BRANCH"
+echo "📁 워크트리 디렉터리: $MAIN_BRANCH"
 echo ""
 echo "🎯 다음 단계:"
-echo "  cd ../$MAIN_BRANCH"
+echo "  cd $MAIN_BRANCH"
 echo "  # 프로젝트 작업 시작"
 echo ""
 echo "💡 추가 명령어:"

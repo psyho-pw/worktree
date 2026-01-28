@@ -18,26 +18,23 @@ gh auth login
 
 ## 🚀 Quick Start
 
-### 1. 템플릿 클론
+### 템플릿 클론
 
 ```bash
 git clone <this-template-repo-url> my-workspace
 cd my-workspace
 ```
 
-### 2. 실제 프로젝트 저장소 초기화
+### 작업할 프로젝트 저장소 초기화 및 메인 브랜치 워크트리 생성
 
 ```bash
 make init REPO_URL=git@github.com:your-org/your-repo.git
+make make worktree-add-branch main
+# or
+./setup.sh
 ```
 
-### 3. 메인 브랜치 워크트리 생성
-
-```bash
-make worktree-add-branch main
-```
-
-### 4. 프로젝트 디렉터리 구조
+## 📁 프로젝트 디렉터리 구조
 
 ```bash
 my-workspace/
@@ -78,7 +75,7 @@ make worktree-add-branch develop
 make worktree-add-branch feature/new-feature
 
 # 슬래시(/)는 자동으로 하이픈(-)으로 변환됨
-# feature/auth → ../feature-auth/
+# feature/auth → feature-auth/
 ```
 
 ### PR로 워크트리 생성
@@ -87,7 +84,7 @@ make worktree-add-branch feature/new-feature
 # PR #2135의 브랜치로 워크트리 생성
 make worktree-add-pr 2135
 
-# 결과: ../pr-2135/ 디렉터리 생성
+# 결과: pr-2135/ 디렉터리 생성
 ```
 
 ### 워크트리 목록 확인
@@ -138,12 +135,11 @@ make worktree move ../old-dir ../new-dir
 ### 일반적인 개발 워크플로우
 
 ```bash
-# 1. 초기 설정
+# 1. 초기 설정 (my-workspace 디렉터리에서)
 make init REPO_URL=git@github.com:company/product.git
 make worktree-add-branch main
 
 # 2. 새 기능 개발
-cd ..
 make worktree-add-branch feature/user-auth
 cd feature-user-auth
 # ... 작업 ...
@@ -157,11 +153,12 @@ cd ../main
 cd ../feature-user-auth
 # 다시 feature 브랜치로 돌아와서 작업
 
-# 4. PR 리뷰
+# 4. PR 리뷰 (my-workspace로 돌아와서)
+cd ..
 make worktree-add-pr 2135
-cd ../pr-2135
+cd pr-2135
 # ... 리뷰 ...
-cd ../my-workspace
+cd ..
 make worktree-remove pr-2135
 ```
 
@@ -172,10 +169,10 @@ make worktree-remove pr-2135
 cd feature-user-auth
 # ... 작업 중 ...
 
-# 2. 긴급 버그 발견! 브랜치 전환 없이 핫픽스
+# 2. 핫픽스를 워크트리에서 처리
 cd ..
 make worktree-add-branch hotfix/critical-bug
-cd ../hotfix-critical-bug
+cd hotfix-critical-bug
 # ... 버그 수정 ...
 git add .
 git commit -m "fix: 크리티컬 버그 수정"
