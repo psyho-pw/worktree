@@ -15,6 +15,7 @@ init: ## Bare repository 초기화 (e.g. make init git@github.com:user/repo.git)
 	@test -n "$(REPO_URL)" || (echo "REPO_URL is required. Example: make init git@..."; exit 1)
 	@test ! -d "$(BARE_DIR)" || (echo "$(BARE_DIR) already exists. Delete it and try again."; exit 1)
 	@git clone --bare $(REPO_URL) $(BARE_DIR)
+	@$(GIT) config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 check-bare:
 	@if [ ! -d "$(BARE_DIR)" ]; then \
