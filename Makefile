@@ -59,7 +59,7 @@ worktree-lock: check-bare ## 워크트리 잠금 (e.g. make worktree-lock ../tes
 	$(GIT_WORKTREE) lock $(filter-out $@,$(MAKECMDGOALS))
 
 worktree-unlock: ## 워크트리 잠금 해제
-        $(GIT_WORKTREE) unlock $(filter-out $@,$(MAKECMDGOALS))
+	$(GIT_WORKTREE) unlock $(filter-out $@,$(MAKECMDGOALS))
 
 worktree-repair: check-bare ## 워크트리 복구
 	$(GIT_WORKTREE) repair
