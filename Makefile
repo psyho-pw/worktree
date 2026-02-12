@@ -58,6 +58,9 @@ worktree-prune: check-bare ## 삭제된 워크트리 정리
 worktree-lock: check-bare ## 워크트리 잠금 (e.g. make worktree-lock ../test)
 	$(GIT_WORKTREE) lock $(filter-out $@,$(MAKECMDGOALS))
 
+worktree-unlock: ## 워크트리 잠금 해제
+        $(GIT_WORKTREE) unlock $(filter-out $@,$(MAKECMDGOALS))
+
 worktree-repair: check-bare ## 워크트리 복구
 	$(GIT_WORKTREE) repair
 
